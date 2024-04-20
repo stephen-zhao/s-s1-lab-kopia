@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+  kopia:
+    build: ..
+    ports:
+      - 51515:51515
+    command:
+      - start-kopia-server.sh
+      - --disable-csrf-token-checks
+      - --insecure
+      - --address=0.0.0.0:51515
+      - --server-username=ksu
+      - --server-control-username=kscu
+    environment:
+      USER: "ku"
+      KOPIA_SERVER_PASSWORD_FILE: /run/secrets/kopia_server_password
+      KOPIA_SERVER_CONTROL_PASSWORD_FILE: /run/secrets/kopia_server_control_password
+      KOPIA_PASSWORD_FILE: /run/secrets/kopia_password
+    volumes:
+      - ./runtime_env/config:/app/config
+      - ./runtime_env/cache:/app/cache
+      - ./runtime_env/logs:/app/logs
+      - ./runtime_env/repository:/repository
+      - ./runtime_env/tmp:/tmp:shared
+    secrets:
+      - kopia_server_password
+      - kopia_server_control_password
+      - kopia_password
+
+secrets:
+  kopia_server_password:
+    file: ./runtime_env/secrets/kopia_server_password
+  kopia_server_control_password:
+    file: ./runtime_env/secrets/kopia_server_control_password
+  kopia_password:
+    file: ./runtime_env/secrets/kopia_password
+
