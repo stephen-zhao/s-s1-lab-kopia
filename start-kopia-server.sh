@@ -45,10 +45,10 @@ fi
 
 if [[ -n "${KOPIA_SERVER_CONTROL_PASSWORD}" ]]; then
   ADDITIONAL_ARGS[$i]="--server-control-password=${KOPIA_SERVER_CONTROL_PASSWORD}"
-  ((++i)
+  ((++i))
 fi
 
 # === Replace process with kopia server ===
 
-exec kopia server start "$@" "${ADDITIONAL_ARGS[@]}"
+exec /bin/kopia server start "$@" "${ADDITIONAL_ARGS[@]}"
 

@@ -1,6 +1,8 @@
-FROM      kopia/kopia:latest
+FROM        kopia/kopia:latest
 
-COPY      start-kopia-server.sh /bin
+COPY        start-kopia-server.sh /bin
 
-RUN       chmod a+x /bin/start-kopia-server.sh
+RUN         chmod a+x /bin/start-kopia-server.sh
+
+ENTRYPOINT  ["/bin/bash"]
 
