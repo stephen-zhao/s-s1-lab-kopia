@@ -5,7 +5,6 @@ services:
     ports:
       - 51515:51515
     command:
-      - start-kopia-server.sh
       - --disable-csrf-token-checks
       - --insecure
       - --address=0.0.0.0:51515
