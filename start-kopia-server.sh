@@ -50,5 +50,6 @@ fi
 
 # === Replace process with kopia server ===
 
+export KOPIA_PASSWORD
 exec /bin/kopia server start "$@" "${ADDITIONAL_ARGS[@]}"
 
