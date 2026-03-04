@@ -65,10 +65,17 @@ jobs:
       - name: Extract underlying Kopia version
         id: kopia-version
         run: |
-          # Parse the FROM line to get the target image
-          TARGET_IMAGE=$(grep '^FROM[[:space:]]\+kopia/kopia:' Dockerfile | awk '{print $2}')
+          # Parse the first matching FROM line to get the target image
+          TARGET_IMAGE=$(grep '^FROM[[:space:]]\+kopia/kopia:' Dockerfile | awk '{print $2}' | head -n1)
+
+          # Fail fast if no matching FROM line is found
+          if [ -z "$TARGET_IMAGE" ]; then
+            echo "No FROM kopia/kopia:... line found in Dockerfile" >&2
+            exit 1
+          fi
+
           echo "Target Image: $TARGET_IMAGE"
-          
+
           # Pull the image to ensure it's available locally
           docker pull "$TARGET_IMAGE"
           
