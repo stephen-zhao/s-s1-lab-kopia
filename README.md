@@ -25,7 +25,7 @@ FROM ghcr.io/stephen-zhao/s-s1-lab-kopia:main
 
 ### Tags
 
-There are tags on the published Docker images are passed through from the underlying official images, along with a prefix "passthrough-". For example, `passthrough-v0.22.3` of the our published image will be our latest build on `main` branch that uses the official image tagged `v0.22.3`.
+Tags on the published Docker images are passed through from the underlying official images, along with a "passthrough-" prefix. For example, `passthrough-v0.22.3` in our published image will be our latest build on the `main` branch that uses the official image tagged `v0.22.3`.
 
 ## Start Script
 
